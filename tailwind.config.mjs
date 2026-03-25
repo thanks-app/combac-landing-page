@@ -15,6 +15,7 @@ export default {
       fontFamily: {
         sketch: ["CabinSketch", ...defaultTheme.fontFamily.mono],
         sans: ["Rowdies", ...defaultTheme.fontFamily.sans],
+        greatVibes: ["Great Vibes", ...defaultTheme.fontFamily.serif],
       },
       animation: {
         "meteor-effect": "meteor 5s linear infinite",
@@ -33,6 +34,28 @@ export default {
   },
   plugins: [require("daisyui"), require("@tailwindcss/typography")],
   daisyui: {
-    themes: ["dark", config.theme],
+    themes: [
+      "dark",
+      {
+        combac: {
+          primary: "#7C3AED",
+          "primary-content": "#FFFFFF",
+          secondary: "#A78BFA",
+          "secondary-content": "#FFFFFF",
+          accent: "#10B981",
+          "accent-content": "#FFFFFF",
+          neutral: "#334155",
+          "base-100": "#0F172A",
+          "base-200": "#1E293B",
+          "base-300": "#334155",
+          "base-content": "#F1F5F9",
+          info: "#C4B5FD",
+          success: "#34D399",
+          warning: "#FBBF24",
+          error: "#F87171",
+        },
+      },
+      config.theme,
+    ],
   },
 };
