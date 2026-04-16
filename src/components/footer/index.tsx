@@ -41,7 +41,7 @@ function Footer() {
               }}
               transition={{ delay: index * 0.25 }}
               className="text-xl font-bold block uppercase whitespace-nowrap link no-underline text-primary hover:text-primary/50 md:text-4xl"
-              href={getAssetPath(resolveLink(href))}
+              href={resolveLink(href)}
             >
               {title}
             </motion.a>
@@ -101,7 +101,7 @@ function Footer() {
                 }}
                 transition={{ delay: 0.25 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath(resolveLink("/terms-and-conditions"))}
+                href={resolveLink("/terms-and-conditions")}
               >
                 {termsText}
               </motion.a>
@@ -114,7 +114,7 @@ function Footer() {
                 }}
                 transition={{ delay: 0.5 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath(resolveLink("/privacy-policy"))}
+                href={resolveLink("/privacy-policy")}
               >
                 {privacyText}
               </motion.a>
@@ -127,7 +127,7 @@ function Footer() {
                 }}
                 transition={{ delay: 0.75 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath(resolveLink("/cookies-policy"))}
+                href={resolveLink("/cookies-policy")}
               >
                 {cookiesText}
               </motion.a>

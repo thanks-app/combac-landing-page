@@ -11,7 +11,6 @@ function Navbar() {
   const {
     locale,
     name,
-    logo,
     showThemeSwitch,
     topNavbar,
     googlePlayLink,
@@ -62,14 +61,7 @@ function Navbar() {
         />
         <div className="navbar-start">
           <a
-            href={
-              typeof window !== "undefined"
-                ? window.location.pathname.split("/")[1] === "fr" ||
-                  window.location.pathname.split("/")[1] === "ar"
-                  ? `/${window.location.pathname.split("/")[1]}`
-                  : "/"
-                : "/"
-            }
+            href={resolveLink("/")}
             className="flex items-center gap-2"
           >
             <span className="app-name combac-glow font-bold">{name}</span>
