@@ -8,8 +8,19 @@ import { getAssetPath } from "../../utils/assets";
 
 function Footer() {
   const {
+    locale,
     footer: { links, legalLinks, socials },
   } = useContext(ConfigContext)!;
+
+  const resolveLink = (href: string) => {
+    if (href.startsWith("http")) return href;
+    const baseHref = href.startsWith("./") ? href.slice(1) : (href.startsWith("/") ? href : `/${href}`);
+    return locale && locale !== "en" ? `/${locale}${baseHref}` : baseHref;
+  };
+
+  const termsText = locale === "ar" ? "الشروط والأحكام" : locale === "fr" ? "Conditions générales" : "Terms & conditions";
+  const privacyText = locale === "ar" ? "سياسة الخصوصية" : locale === "fr" ? "Politique de confidentialité" : "Privacy policy";
+  const cookiesText = locale === "ar" ? "سياسة ملفات تعريف الارتباط" : locale === "fr" ? "Politique relative aux cookies" : "Cookies policy";
 
   return (
     <footer className="relative bg-neutral text-neutral-content px-4 pt-0 pb-12">
@@ -30,7 +41,7 @@ function Footer() {
               }}
               transition={{ delay: index * 0.25 }}
               className="text-xl font-bold block uppercase whitespace-nowrap link no-underline text-primary hover:text-primary/50 md:text-4xl"
-              href={getAssetPath(href)}
+              href={getAssetPath(resolveLink(href))}
             >
               {title}
             </motion.a>
@@ -90,9 +101,9 @@ function Footer() {
                 }}
                 transition={{ delay: 0.25 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath("/terms-and-conditions")}
+                href={getAssetPath(resolveLink("/terms-and-conditions"))}
               >
-                Terms & conditions
+                {termsText}
               </motion.a>
             )}
             {legalLinks.privacyPolicy && (
@@ -103,9 +114,9 @@ function Footer() {
                 }}
                 transition={{ delay: 0.5 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath("/privacy-policy")}
+                href={getAssetPath(resolveLink("/privacy-policy"))}
               >
-                Privacy policy
+                {privacyText}
               </motion.a>
             )}
             {legalLinks.cookiesPolicy && (
@@ -116,9 +127,9 @@ function Footer() {
                 }}
                 transition={{ delay: 0.75 }}
                 className="font-bold text-primary hover:text-primary/50 lg:whitespace-nowrap"
-                href={getAssetPath("/cookies-policy")}
+                href={getAssetPath(resolveLink("/cookies-policy"))}
               >
-                Cookies policy
+                {cookiesText}
               </motion.a>
             )}
           </div>

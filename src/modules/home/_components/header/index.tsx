@@ -46,6 +46,7 @@ function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
                 className="mt-0 mb-4 text-4xl md:text-6xl tracking-tight"
+                dir={/[\u0600-\u06FF]/.test(header.headline) ? "rtl" : "ltr"}
               >
                 {header.headlineMark ? (
                   <>

@@ -16,4 +16,11 @@ export default defineConfig({
     },
   },
   integrations: [react(), tailwind()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "fr", "ar"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

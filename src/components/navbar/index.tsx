@@ -5,9 +5,11 @@ import { easeIn, motion, useScroll, useTransform } from "framer-motion";
 import { useContext, useState } from "react";
 import { ConfigContext } from "../../utils/configContext";
 import ThemeSwitcher from "./themeSwitcher";
+import LanguageSelector from "./languageSelector";
 
 function Navbar() {
   const {
+    locale,
     name,
     logo,
     showThemeSwitch,
@@ -15,6 +17,12 @@ function Navbar() {
     googlePlayLink,
     appStoreLink,
   } = useContext(ConfigContext)!;
+
+  const resolveLink = (href: string) => {
+    if (href.startsWith("http")) return href;
+    const baseHref = href.startsWith("./") ? href.slice(1) : (href.startsWith("/") ? href : `/${href}`);
+    return locale && locale !== "en" ? `/${locale}${baseHref}` : baseHref;
+  };
 
   const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -53,12 +61,23 @@ function Navbar() {
           )}
         />
         <div className="navbar-start">
-          <a href="/" className="flex items-center gap-2">
+          <a
+            href={
+              typeof window !== "undefined"
+                ? window.location.pathname.split("/")[1] === "fr" ||
+                  window.location.pathname.split("/")[1] === "ar"
+                  ? `/${window.location.pathname.split("/")[1]}`
+                  : "/"
+                : "/"
+            }
+            className="flex items-center gap-2"
+          >
             <span className="app-name combac-glow font-bold">{name}</span>
           </a>
         </div>
-        <div className="navbar-end md:hidden">
-          {showThemeSwitch && <div className="mr-2"><ThemeSwitcher /></div>}
+        <div className="navbar-end md:hidden gap-2">
+          {showThemeSwitch && <ThemeSwitcher />}
+          <LanguageSelector />
           <MenuToggle
             toggle={() => setIsMobileNavVisible((current) => !current)}
             isOpen={isMobileNavVisible}
@@ -67,11 +86,12 @@ function Navbar() {
         <div className="navbar-end hidden font-semibold md:flex">
           <ul className="flex gap-4 px-1 items-center">
             {showThemeSwitch && <ThemeSwitcher />}
+            <LanguageSelector />
             {topNavbar.links.map(({ title, href }, index) => (
               <li key={index}>
                 <a
                   className="text-sm whitespace-nowrap link link-hover"
-                  href={href}
+                  href={resolveLink(href)}
                 >
                   {title}
                 </a>
@@ -79,7 +99,7 @@ function Navbar() {
             ))}
           </ul>
           {topNavbar.cta && (
-            <a href="/app" className="ml-3 btn btn-primary btn-outline py-4">
+            <a href={resolveLink("/app")} className="ml-3 btn btn-primary btn-outline py-4">
               {topNavbar.cta}
             </a>
           )}
@@ -94,7 +114,7 @@ function Navbar() {
           <motion.a
             key={index}
             className="btn btn-ghost w-full"
-            href={href}
+            href={resolveLink(href)}
             variants={{
               show: { x: 0 },
               hidden: { x: "-100%" },

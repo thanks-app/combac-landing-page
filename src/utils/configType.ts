@@ -1,4 +1,5 @@
 export type TemplateConfig = {
+    locale?: string;
     name: string;
     seo: {
         title: string;

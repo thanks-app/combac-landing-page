@@ -6,10 +6,12 @@ import { getAssetPath } from "utils/assets";
 
 const { backgroundGrid, seo, logo, theme, forceTheme } =
   Astro.props as TemplateConfig;
+
+const lang = Astro.currentLocale || "en";
 ---
 
 <!doctype html>
-<html lang="en" data-theme={theme}>
+<html lang={lang} data-theme={theme}>
   <head>
     <!-- Global Metadata -->
     <meta charset="utf-8" />
@@ -20,7 +22,13 @@ const { backgroundGrid, seo, logo, theme, forceTheme } =
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+    <style is:global define:vars={{ lang }}>
+      [lang="ar"] {
+        font-family: 'Cairo', sans-serif !important;
+      }
+    </style>
 
     <!-- Primary Meta Tags -->
     <title>{seo.title}</title>
