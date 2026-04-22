@@ -143,5 +143,12 @@ export type TemplateConfig = {
                 rows: string[];
             }[] | undefined;
         } | undefined;
+        aiFeature?: {
+            id?: string | undefined;
+            title: string;
+            subtitle: string;
+            badge?: string | undefined;
+            image?: string | undefined;
+        } | undefined;
     };
 }

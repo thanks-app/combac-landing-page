@@ -8,10 +8,10 @@ import { getAssetPath } from "../../../../utils/assets";
 const planImages = [
   "/misc/wallet-front-color.webp",
   "/misc/money-front-color.webp",
-  "/misc/locker-front-color.webp",
+  "/3D/bulb-front-color.webp",
 ];
 
-const planBGs = ["bg-primary/5", "bg-secondary/5", "bg-accent/5"];
+const planBGs = ["bg-primary/5", "bg-secondary/5", "bg-primary/10"];
 
 function Pricing() {
   const {
